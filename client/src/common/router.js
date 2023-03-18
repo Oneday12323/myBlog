@@ -24,6 +24,14 @@ let routes = [
       },
     ],
   },
+  {
+    path: "/",
+    component: () => import("../views/HomePage.vue"),
+  },
+  {
+    path: "/detail",
+    component: () => import("../views/Detail.vue"),
+  },
 ];
 
 const router = createRouter({

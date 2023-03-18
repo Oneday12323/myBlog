@@ -1,6 +1,7 @@
 <template>
     <div class="login-panel ">
         <n-card title="管理后台登录">
+
             <n-form :model="admin" :rules="rules">
                 <n-form-item label="账号" path="account">
                     <n-input v-model:value="admin.account" placeholder="请输入账号" />
@@ -61,7 +62,7 @@ const login = async () => {
         adminStore.account = result.data.data.account;
         adminStore.id = result.data.data.id;
         message.info("登录成功");
-        router.push("/dashboard")
+        router.push("/dashboard/article")
     } else {
         message.error("登录失败")
     }
@@ -73,5 +74,6 @@ const login = async () => {
     width: 500px;
     margin: 0 auto;
     margin-top: 130px;
+
 }
 </style>

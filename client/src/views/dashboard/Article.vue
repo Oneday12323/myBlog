@@ -5,7 +5,7 @@
                 <n-tab-pane name="list" tab="文章列表">
                     <div v-for="(blog, index) in blogListInfo" style="margin-bottom:15px ;">
                         <n-card :title="blog.title">
-                            {{ blog.content }}
+                            <div v-html="blog.content"></div>
                             <template #footer>
                                 <n-space align="center">
                                     <div>发布时间：{{ blog.create_time }}</div>
@@ -161,9 +161,6 @@ const toUpdate = async (blog) => {
     updateArticle.category_id = res.data.rows[0].category_id;
     updateArticle.content = res.data.rows[0].content;
     updateArticle.id = res.data.rows[0].id;
-
-
-
     console.log(res);
 }
 
@@ -179,13 +176,31 @@ const update = async () => {
 }
 
 const toDelete = async (blog) => {
-    let res = await axios.delete(`/blog/_token/delete?id=${blog.id}`);
+    dialog.warning({
+        title: '警告',
+        content: '是否要删除？',
+        positiveText: '确定',
+        negativeText: '取消',
+        onPositiveClick: async () => {
+            let res = await axios.delete(`/blog/_token/delete?id=${blog.id}`);
+            if (res.data.code == 200) {
+                //删除成功要读取一次列表数据
+                loadBlogs()
+                message.info(res.data.msg)
+            } else {
+                message.error(res.data.msg)
+            }
+        },
+        onNegativeClick: () => { }
+    })
+
+    /* let res = await axios.delete();
     if (res.data.code == 200) {
         message.info(res.data.msg);
         loadBlogs()
     } else {
         message.error(res.data.msg)
-    }
+    } */
 
 }
 </script>

@@ -28,6 +28,8 @@ const route = useRoute();
 let menus = [
     { name: "文章管理", herf: "/dashboard/article" },
     { name: "分类管理", herf: "/dashboard/category" },
+    { name: "首页", herf: "/" },
+
     { name: "退出", herf: "logout" }
 ]
 

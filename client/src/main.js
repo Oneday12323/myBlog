@@ -36,6 +36,7 @@ app.provide("notification", notification);
 app.use(naive);
 app.use(createPinia());
 
+//请求拦截器
 const adminStore = AdminStore();
 axios.interceptors.request.use((config) => {
   config.headers.token = adminStore.token;
